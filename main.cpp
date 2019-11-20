@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QSqlDatabase>
+#include "maintenance.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +18,11 @@ int main(int argc, char *argv[])
     db.setUserName("root");
     db.setPassword("");
     bool ok = db.open();
+
+    Maintenance *m = new Maintenance;
+    m->affecterVisites();
+    m->afficherTout();
+
 
     return a.exec();
 }

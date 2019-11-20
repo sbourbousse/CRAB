@@ -1,6 +1,6 @@
 #include "station.h"
 
-Station::Station(int unIdStation, QString unLibelleEmplacement, QVector<Borne *> desBornes)
+Station::Station(int unIdStation, QString unLibelleEmplacement, QVector<Borne> desBornes)
 {
     idStation = unIdStation;
     libelleEmplacement = unLibelleEmplacement;
@@ -17,7 +17,7 @@ QString Station::getLibelleEmplacement()
     return libelleEmplacement;
 }
 
-Visite *Station::getLesVisite()
+Visite * Station::getLesVisite()
 {
     QVector<Borne> bornesAReviser;
 
@@ -26,20 +26,21 @@ Visite *Station::getLesVisite()
 
     for (int i = 0 ; i<lesBornes.size() ; i++)
     {
-        if(lesBornes[i]->estARevisier())
+        if(lesBornes[i].estARevisier())
         {
             dureeTotalRevision += lesBornes[i].getDureeRevision();
-            bornesAReviser.push_back(lesBornes[i]);
+            bornesAReviser.push_back(lesBornes[i].getBorne());
             aucuneRevision=false;
         }
     }
 
-    Visite maVisite('p',dureeTotalRevision,this,bornesAReviser);
+    Visite *maVisite = new Visite('p',dureeTotalRevision,this,bornesAReviser);
+            //maVisite('p',dureeTotalRevision,this,bornesAReviser);
 
-    if(aucuneRevision)
-        //"Je fais quoi la";
-        int rien = 0;
-    else
+    if(!aucuneRevision)
         return maVisite;
+    else
+        return NULL;
+
 }
 

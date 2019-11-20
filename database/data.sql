@@ -22,5 +22,10 @@ load data local infile './possede.csv' into table possede
 	fields terminated by ';'
 	lines terminated by '\n';
 
+load data local infile './rechargement.csv' into table rechargement
+	CHARACTER SET utf8
+	fields terminated by ';'
+	lines terminated by '\n';
+
 
 

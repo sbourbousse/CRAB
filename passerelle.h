@@ -13,8 +13,8 @@
 class Passerelle
 {
 public:
-    static QVector<Technicien> chargerLesTechniciens();
-    static QVector<Technicien> chargerLesStations();
+    static QVector<Technicien *> chargerLesTechniciens();
+    static QVector<Station*> chargerLesStations();
 };
 
 #endif // PASSERELLE_H

@@ -5,7 +5,7 @@ Visite::Visite()
 
 }
 
-Visite::Visite(QChar unEtat, int uneDureeTotale, Station uneStation, QVector<Borne> desBornes)
+Visite::Visite(QChar unEtat, int uneDureeTotale, Station *uneStation, QVector<Borne> desBornes)
 {
     etat=unEtat;
     dureeTotale=uneDureeTotale;
@@ -29,4 +29,11 @@ void Visite::changerEtat()
         etat='a';
     else if(etat=='a')
         etat='r';
+}
+
+QString Visite::getInfo()
+{
+    QString info = "Etat : \n Durée : "+QString::number(dureeTotale)+"\n Station : "+laStation->getLibelleEmplacement();
+
+    return info;
 }

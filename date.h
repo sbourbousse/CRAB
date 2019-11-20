@@ -12,11 +12,11 @@ private:
 public:
     Date();
     Date(int uneAnnee, int unMois, int unJour);
-    static Date aujourdhui();
+    static Date* aujourdhui();
     int annee();
     int mois();
     int jour();
-    int difference(Date uneDate);
+    int difference(Date *uneDate);
 };
 
 #endif // DATE_H

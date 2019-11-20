@@ -1,6 +1,11 @@
 #include "borne.h"
 
-Borne::Borne(int unIdBorne, Date uneDateDerniereRevision, int unIndiceCompteurUnites, TypeBorne* unType)
+Borne::Borne()
+{
+
+}
+
+Borne::Borne(int unIdBorne, Date* uneDateDerniereRevision, int unIndiceCompteurUnites, TypeBorne unType)
 {
     idBorne = unIdBorne;
     dateDerniereRevision = uneDateDerniereRevision;
@@ -10,7 +15,7 @@ Borne::Borne(int unIdBorne, Date uneDateDerniereRevision, int unIndiceCompteurUn
 
 int Borne::getDureeRevision()
 {
-    leType->getDureeRevision();
+    leType.getDureeRevision();
 }
 
 bool Borne::estARevisier()
@@ -24,10 +29,15 @@ bool Borne::estARevisier()
      */
     bool aReviser = false;
 
-    if(dateDerniereRevision.difference(Date::aujourdhui())>=leType->getNbJoursEntreRevisions())
+    if(Date::aujourdhui()->difference(dateDerniereRevision)>=leType.getNbJoursEntreRevisions())
         aReviser = true;
-    else if (indiceCompteurUnites>=leType->getNbUnitesEntreRevisions())
+    else if (indiceCompteurUnites>=leType.getNbUnitesEntreRevisions())
         aReviser = true;
 
     return aReviser;
+}
+
+Borne Borne::getBorne()
+{
+    return *this;
 }
