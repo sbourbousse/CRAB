@@ -1,5 +1,9 @@
 #include "passerelle.h"
 
+/**
+ * @brief Passerelle::chargerLesTechniciens Fonction qui renvoie un vecteur de tout les techniciens de la base de données
+ * @return Vecteur de classe personnalisée(QVector<Technicien>) : Tout les techniciens
+ */
 QVector<Technicien *> Passerelle::chargerLesTechniciens()
 {
     QVector<Technicien*> toutLesTechniciens;
@@ -20,6 +24,11 @@ QVector<Technicien *> Passerelle::chargerLesTechniciens()
     return toutLesTechniciens;
 }
 
+/**
+ * @brief Passerelle::chargerLesStations Fonction qui renvoie toutes les stations
+ * @return Vecteur de classe personnalisée(QVector<Station>) : Toutes les stations
+ * Récupère toute les station, toute les bornes de chaques station, chaque Type de chaque borne
+ */
 QVector<Station *> Passerelle::chargerLesStations()
 {
     QVector<Station*> touteLesStations;
@@ -46,7 +55,8 @@ QVector<Station *> Passerelle::chargerLesStations()
         while(requeteBornes.next())
         {
             //Recuperer le type de la borne
-            QString recupererLeType = "select typeBorneId, typeBorneDureeRevision, typeBorneNbJourEntreRevision, typeBorneNbRechargementEntreRevision from borne natural join type_borne where borneId="+requeteBornes.value("borneId").toString();
+            QString recupererLeType = "select typeBorneId, typeBorneDureeRevision, typeBorneNbJourEntreRevision, typeBorneNbRechargementEntreRevision "
+                                      "from borne natural join type_borne where borneId="+requeteBornes.value("borneId").toString();
             qDebug()<<recupererLeType;
             QSqlQuery requeteType(recupererLeType);
 
@@ -73,5 +83,35 @@ QVector<Station *> Passerelle::chargerLesStations()
     requeteStations.clear();
 
     return touteLesStations;
+}
+
+/**
+ * @brief Passerelle::enregistrerVisite Procédure qui insere une visite et les bornes à reviser dans la base de données
+ * @param uneVisite Classe personnalisée(Visite) : la visite à inserer
+ * @param unMatricule Entier(int) : matricule du technicien affecté à la visite
+ * Enregistre une visite dans la table visite et une ou plusieurs bornes dans la table concerne
+ */
+void Passerelle::enregistrerVisite(Visite *uneVisite, int unMatricule)
+{
+    QString etat(uneVisite->getEtat());
+    QString date = QString::number(Date::aujourdhui()->year())+"-"+QString::number(Date::aujourdhui()->month())+"-"+QString::number(Date::aujourdhui()->day());
+    QString insertVisite = "insert into visite (visiteEtat, visiteDate, stationId, technicienId) "
+                           "values (\""+etat+"\",\""+date+"\","+QString::number(uneVisite->getStation()->getId())+","+QString::number(unMatricule)+")";
+    qDebug()<<insertVisite;
+
+    QSqlQuery requeteVisite(insertVisite);
+
+
+
+    for(int i = 0 ; i<uneVisite->getBornes().size() ; i++)
+    {
+        QString insertConcerne = "insert into concerne (visiteId,borneId) "
+                                 "values ( LAST_INSERT_ID(),"+QString::number(uneVisite->getBornes()[i].getId())+")";
+
+        qDebug()<<insertConcerne;
+
+        QSqlQuery requeteConcerne(insertConcerne);
+    }
+
 }
 

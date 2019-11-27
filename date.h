@@ -3,6 +3,10 @@
 
 #include <QDate>
 
+/**
+ * @brief La classe Date
+ * herite de la classe QDate
+ */
 class Date : public QDate
 {
 private:

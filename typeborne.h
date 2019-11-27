@@ -3,6 +3,9 @@
 
 #include <QString>
 
+/**
+ * @brief La classe TypeBorne
+ */
 class TypeBorne
 {
 private:

@@ -6,6 +6,9 @@
 #include "station.h"
 
 class Station;
+/**
+ * @brief La classe Visite
+ */
 class Visite
 {
 private:
@@ -20,6 +23,8 @@ public:
     QChar getEtat(); // retourne l'état de la visite
     void changerEtat(); // modifie l'état de la visite, de 'p' programmée à 'a' affectée, ou de 'a' affectée à 'r' réalisée
     QString getInfo();
+    Station *getStation();
+    QVector<Borne> getBornes();
 };
 
 #endif // VISITE_H

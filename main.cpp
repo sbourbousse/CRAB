@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include <QApplication>
 #include <QSqlDatabase>
 #include "maintenance.h"
@@ -6,8 +5,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //MainWindow w;
-    //w.show();
 
     /*
      * CONNEXION A LA BASE DE DONNEE
@@ -19,8 +16,11 @@ int main(int argc, char *argv[])
     db.setPassword("");
     bool ok = db.open();
 
+    //Creer l'instance Maintenance
     Maintenance *m = new Maintenance;
+    //J'affecte les visites au techniciens
     m->affecterVisites();
+    //J'affiche les visites avec des qDebug
     m->afficherTout();
 
 

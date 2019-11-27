@@ -8,6 +8,9 @@
 #include "technicien.h"
 #include "visite.h"
 
+/**
+ * @brief La classe Maintenance
+ */
 class Maintenance
 {
 private:

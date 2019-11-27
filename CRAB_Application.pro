@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core sql
 CONFIG   += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     typeborne.cpp \
     borne.cpp \
     station.cpp \
@@ -35,7 +34,7 @@ SOURCES += main.cpp\
     date.cpp \
     passerelle.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     typeborne.h \
     borne.h \
     station.h \
@@ -45,4 +44,3 @@ HEADERS  += mainwindow.h \
     date.h \
     passerelle.h
 
-FORMS    += mainwindow.ui

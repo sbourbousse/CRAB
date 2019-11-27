@@ -124,7 +124,9 @@ create table supporter(
 create table technicien(
     technicienId mediumint unsigned primary key,
     technicienNom varchar(64),
-    technicienPrenom varchar(64)
+    technicienPrenom varchar(64),
+    technicienLogin varchar(64),
+    technicienMotDePasse varchar(32)
 )engine=innodb charset=utf8;
 
 create table type_incident(
@@ -149,3 +151,17 @@ create table intervention(
     incidentId int unsigned references incident(incidentId),
     technicienId mediumint unsigned references technicien(technicienId)
 )engine=innodb charset=utf8;
+
+create table visite(
+	visiteId int unsigned primary key auto_increment,
+	visiteEtat char(1),
+	visiteDate date,
+	stationId int unsigned references station(stationId),
+	technicienId mediumint unsigned references technicien(technicienId)
+)engine=innodb charset=utf8;
+
+create table concerne(
+	visiteId int unsigned references visite(visiteId),
+	borneId int unsigned references borne(borneId)
+)engine=innodb charset=utf8;
+

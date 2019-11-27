@@ -5,6 +5,9 @@
 #include <QVector>
 #include "visite.h"
 
+/**
+ * @brief La classe Technicien
+ */
 class Technicien
 {
 private:
@@ -18,6 +21,7 @@ public:
     void affecterVisite(Visite* uneVisite); // ajoute la visite uneVisite dans les visites affectées au technicien
     QVector<Visite*> getLesVisites(); // retourne l'ensemble des visites affectées au technicien
     QString getInfo();
+    int getMatricule();
 
 };
 

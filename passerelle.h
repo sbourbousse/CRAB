@@ -9,12 +9,16 @@
 #include "station.h"
 #include "visite.h"
 
-
+/**
+ * @brief La classe Passerelle
+ * récupère les données de la base
+ */
 class Passerelle
 {
 public:
     static QVector<Technicien *> chargerLesTechniciens();
     static QVector<Station*> chargerLesStations();
+    static void enregistrerVisite(Visite* uneVisite, int unMatricule);
 };
 
 #endif // PASSERELLE_H

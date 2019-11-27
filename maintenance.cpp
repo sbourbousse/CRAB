@@ -1,5 +1,8 @@
 #include "maintenance.h"
 
+/**
+ * @brief Maintenance::Maintenance Constructeur de Maintenance
+ */
 Maintenance::Maintenance()
 {
     lesStations = Passerelle::chargerLesStations();
@@ -8,6 +11,10 @@ Maintenance::Maintenance()
     reviser();
 }
 
+/**
+ * @brief Maintenance::reviser Procédure qui rempli le vecteur de Visite
+ * Rempli l'ensemble des visites à réaliser selon si dans chaque station, il ya une ou plusieurs bornes à réviser
+ */
 void Maintenance::reviser()
 {
     // Etablit l'ensemble des visites à réaliser sur les stations
@@ -18,6 +25,11 @@ void Maintenance::reviser()
     }
 }
 
+/**
+ * @brief Maintenance::affecterVisites Procédure qui repartie equitablement les visites au techniciens
+ * Chaque visite est affectée au technicien le moins occupé en temps total de maintenance préventive.
+ * L'état de chaque visite doit alors être mis à jour.
+ */
 void Maintenance::affecterVisites()
 {
     // Affecte les visites à réaliser aux techniciens, en répartissant équitablement le travail
@@ -49,10 +61,16 @@ void Maintenance::affecterVisites()
         //On attribut la visite au technicien en bas du tableau (avec le moins d'heure)
         lesTechniciens[0]->affecterVisite(lesVisites[i]);
         lesVisites[i]->changerEtat();
+
+        //Enregistrer la visite dans la base de donées
+        Passerelle::enregistrerVisite(lesVisites[i],lesTechniciens[0]->getMatricule());
     }
 
 }
 
+/**
+ * @brief Maintenance::afficherTout
+ */
 void Maintenance::afficherTout()
 {
     for (int i = 0 ; i<lesTechniciens.size() ; i++)

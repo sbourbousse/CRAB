@@ -4,6 +4,9 @@
 #include "date.h"
 #include "typeborne.h"
 
+/**
+* \brief The Borne class
+*/
 class Borne
 {
 private:
@@ -18,6 +21,7 @@ public:
     int getDureeRevision(); // retourne la durée en minutes requise pour réaliser la révision sur la borne, cette durée étant fonction du type de la borne
     bool estARevisier();
     Borne getBorne();
+    int getId();
 
 };
 

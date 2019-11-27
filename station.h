@@ -7,6 +7,9 @@
 #include "visite.h"
 
 class Visite;
+/**
+ * @brief La classe Station
+ */
 class Station
 {
 private:
